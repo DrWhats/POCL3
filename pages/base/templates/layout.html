@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title if title else 'Витрина проектов ИНЭК'}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.2/dist/semantic.min.js"></script>
+
+</head>
+<body style="min-height: 100vh;display: flex;flex-direction: column;">
+<nav>
+    <div class="ui menu">
+        <a class="item" href="{{ url_for('index.index') }}">
+            Главная
+        </a>
+        <a class="item">
+            Витрина проектов
+        </a>
+        <a class="item">
+            О проекте
+        </a>
+        {% if current_user.is_authenticated %}
+        <div class="right item">
+            <div class="ui text">
+                {{ current_user.username }}
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</nav>
+
+<div style="margin-top: 50px; margin-bottom: 50px; margin-left: 20px; margin-right: 20px">
+    <div class="ui container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</div>
+
+{% block footer %}
+<footer style="margin-top:auto">
+    <div class="ui inverted footer segment">
+        <div class="ui container" style="margin: auto; width:100%">
+            <div class="ui equal width grid">
+                <div class="column">
+                    <div class="item">
+                        ИС "ИнПро"
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="item" style="float:right;">
+                        <p>© Худорожков Л.Ю., 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock footer %}
+</body>
+</html>

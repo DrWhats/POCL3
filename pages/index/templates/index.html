@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<script src="static/jquery-tabledit-1.2.3/jquery.tabledit.min.js"></script>
+
+<table class="ui celled table" id="example1">
+    <thead>
+    <tr>
+        <th>Время начала</th>
+        <th>Дисциплина</th>
+        <th>Преподаватель</th>
+        <th>Аудитория</th>
+        <th class="tabledit-toolbar-column"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td data-label="TimeStart">8:00</td>
+        <td data-label="Subject">Программирование</td>
+        <td data-label="Teacher">Худорожков Л.Ю.</td>
+        <td data-label="Auditory">А-205</td>
+    </tr>
+    <tr>
+        <td data-label="TimeStart">9:45</td>
+        <td data-label="Subject">Программирование</td>
+        <td data-label="Teacher">Худорожков Л.Ю.</td>
+        <td data-label="Auditory">А-205</td>
+    </tr>
+    <tr>
+        <td data-label="TimeStart">11:30</td>
+        <td data-label="Subject">Программирование</td>
+        <td data-label="Teacher">Худорожков Л.Ю.</td>
+        <td data-label="Auditory">А-205</td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    $('#example1').Tabledit({
+    url: '/',
+    deleteButton: true,
+    saveButton: true,
+    autoFocus: false,
+    buttons: {
+        edit: {
+            class: 'ui mini yellow icon button',
+            html: '<i class="pencil alternate icon" style="visibility: visible;"></i>',
+            action: 'edit'
+        },
+        save: {
+            class: 'ui mini green icon button',
+            html: '<i class="check circle icon" style="visibility: visible;"></i>',
+            action: 'save'
+        },
+        delete: {
+            class: 'ui mini red icon button',
+            html: '<i class="delete icon" style="visibility: visible;"></i>',
+            action: 'delete'
+        },
+        confirm: {
+            class: 'ui mini red button',
+            html: 'Подтвердить',
+    }
+
+    },
+    columns: {
+        identifier: [0, 'id'],
+        editable: [[1, 'Дисциплина'], [2, 'Преподаватель'], [3, 'Аудитория']]
+    }
+});
+
+
+
+
+
+</script>
+
+{% endblock content %}

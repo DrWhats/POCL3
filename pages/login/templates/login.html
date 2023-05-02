@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h2 class="ui header">Login</h2>
+<form class="ui form" method="POST" action="/login">
+    {{ form.csrf_token }}
+    <div class="field">
+        <label>Электронная почта</label>
+       {{ form.email }}
+    </div>
+    <div class="field">
+        <label>Пароль</label>
+        {{ form.password }}
+    </div>
+    <button class="ui button" type="submit">Login</button>
+</form>
+
+{% endblock content %}
