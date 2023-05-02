@@ -1,10 +1,12 @@
 from database import db
-from models.user import Users
+from models.user import User
 from models.types import Types
 from models.moderator import Moderator
 
+
 class Request(db.Model):
-    userId = db.Column(db.Integer, db.ForeignKey(Users.id))
+    id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.Integer, db.ForeignKey(User.id))
     typeId = db.Column(db.Integer, db.ForeignKey(Types.id))
     phoneNumber = db.Column(db.String(12), nullable=False)
     moderatorId = db.Column(db.Integer, db.ForeignKey(Moderator.id))

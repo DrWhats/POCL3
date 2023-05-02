@@ -9,4 +9,7 @@ def init_db(app):
     db.init_app(app)
     with app.app_context():
         from models.user import User
+        from models.types import Types
+        from models.request import Request
+        from models.moderator import Moderator
         db.create_all()
