@@ -9,7 +9,6 @@ from models.user import User
 from flask_login import LoginManager
 
 login_manager = LoginManager()
-#hi
 
 app = Flask(__name__, template_folder='pages/base/templates')
 app.config['SECRET_KEY'] = 'secret-key'
