@@ -2,30 +2,15 @@
 
 {% block content %}
 
-<h2 class="ui header">Заявка</h2>
-<form class="ui form" method="POST" action="/">
-    {{ form.csrf_token }}
-    <div class="field">
-        <label>ФИО</label>
-       {{ form.fio }}
+<div class="ui container">
+    <h2 class="ui center aligned big icon header">
+        Добро пожаловать в систему заявок!
+        <em data-emoji=":cactus:" class="normal"></em>
+    </h2>
+    <div class="ui center aligned segment">
+        <p><span class="ui large text"> Здесь вы можете подать заявку в ИТ-Сервисы</span></p>
+        <p><span class="ui large text">Для создания новой заявки нажмите на кнопку ниже.</span></p>
+        <a href="/question" class="ui large primary button">Создать заявку</a>
     </div>
-    <div class="field">
-         <label>Электронная почта</label>
-        {{ form.email }}
-    </div>
-    <div class="field">
-         <label>Номер телефона</label>
-        {{ form.phonenumber }}
-    </div>
-    <div class="field">
-         <label>Краткое описание</label>
-        {{ form.shortdescribe }}
-    </div>
-    <div class="field">
-         <label>Вопрос</label>
-        {{ form.question }}
-    </div>
-    <button class="ui button" type="submit">Отправить заявку</button>
-</form>
-
+</div>
 {% endblock content %}
