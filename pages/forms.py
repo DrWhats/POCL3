@@ -15,3 +15,10 @@ class LoginForm(FlaskForm):
     email = StringField('Электронная почта', validators=[DataRequired(), Email()])
     password = PasswordField('Пароль', validators=[DataRequired(), Length(min=6)])
     submit = SubmitField('Войти')
+
+class QuestionsForm(FlaskForm):
+    email = StringField('Электронная почта', validators=[DataRequired(), Email()])
+    question = StringField ('Вопрос',validators=[DataRequired()] )
+    shortdescribe = StringField('Краткое описание', validators=[DataRequired(), Length(max=100)])
+    fio = StringField('ФИО', validators=[DataRequired()])
+    phonenumber = StringField ('Номер телефона',validators=[DataRequired(),Length(min=11, max=11)])
