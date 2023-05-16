@@ -4,6 +4,7 @@ from datetime import timedelta
 from pages.index import index
 from pages.login import login
 from pages.register import register
+from pages.question import question
 from database import init_db, db
 from models.user import User
 from flask_login import LoginManager
@@ -21,7 +22,7 @@ login_manager.init_app(app)
 app.register_blueprint(index.blueprint)
 app.register_blueprint(login.login_bp)
 app.register_blueprint(register.register_bp)
-
+app.register_blueprint(question.question_bp)
 
 @login_manager.user_loader
 def load_user(user_id):
