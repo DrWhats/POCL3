@@ -6,6 +6,7 @@ from pages.login import login
 from pages.register import register
 from pages.question import question
 from pages.logout import logout
+from pages.users import users
 from database import init_db, db
 from models.user import User
 from flask_login import LoginManager
@@ -25,6 +26,7 @@ app.register_blueprint(login.login_bp)
 app.register_blueprint(register.register_bp)
 app.register_blueprint(question.question_bp)
 app.register_blueprint(logout.logout_bp)
+app.register_blueprint(users.users_bp)
 
 @login_manager.user_loader
 def load_user(user_id):
