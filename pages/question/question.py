@@ -1,13 +1,10 @@
 from flask import render_template, session, url_for, redirect, request, Blueprint, flash
-from models.user import User
-import database
-from werkzeug.security import generate_password_hash
 from pages.forms import QuestionsForm
-blueprint = Blueprint('index', __name__, template_folder='templates')
+question_bp = Blueprint('question', __name__, template_folder='templates')
 
 
-@blueprint.route('/', methods=['GET', 'POST'])
-def index():
+@question_bp.route('/question', methods=['GET', 'POST'])
+def question():
     form = QuestionsForm()
     if form.validate_on_submit():
         fio = form.fio.data
@@ -20,7 +17,7 @@ def index():
         print(phonenumber)
         print(shortdescribe)
         print(question)
-        return redirect(url_for('index.index'))
+        return render_template('question_success.html')
     else:
         flash("Invalid username or password.", 'error')
     return render_template('question.html', form = form)
