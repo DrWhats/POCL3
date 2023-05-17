@@ -16,26 +16,34 @@
         <a class="item" href="{{ url_for('index.index') }}">
             Главная
         </a>
+        {% if current_user.is_authenticated %}
         <a class="item" href="{{ url_for('question.question') }}">
             Создать заявку
         </a>
+        {% endif %}
         <a class="item">
             О проекте
         </a>
         {% if current_user.is_authenticated %}
-        <div class="right item">
-            <div class="ui text">
+        <div class="right menu">
+            <div class="ui item">
                 {{ current_user.username }}
             </div>
+            <a class="ui item" href="/logout">
+                <button class="ui blue button">
+                    Выйти
+                </button>
+            </a>
+        </div>
+        {% else %}
+        <div class="right menu">
+            <a class="ui item" href="/login">
+                <button class="ui blue button">
+                    Войти
+                </button>
+            </a>
         </div>
         {% endif %}
-        <div class="right menu">
-            <a class="ui item">
-                Выйти
-            </a>
-
-        </div>
-
 
     </div>
 </nav>

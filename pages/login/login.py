@@ -15,10 +15,7 @@ def login():
         email = form.email.data
         password = form.password.data
         user = User.query.filter_by(email=email).first()
-        print(user.password)
-        print(generate_password_hash(password))
         if user and user.check_password(password):
-            print("всё ок2")
             session['user_id'] = user.id
             flash('Welcome, you have successfully logged in.', 'success')
             login_user(user)
@@ -26,5 +23,4 @@ def login():
         else:
             flash("Invalid username or password.", 'error')
 
-    print("всё плохо")
     return render_template('login.html', form=form)

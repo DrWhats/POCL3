@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<script src="static/jquery-tabledit-1.2.3/jquery.tabledit.min.js"></script>
+
+
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+        <i class="users icon"></i>
+        Пользователи
+    </h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Имя пользователя</th>
+            <th>Роль</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                <div class="ui selection dropdown">
+                    <input type="hidden" name="role">
+                    <i class="dropdown icon"></i>
+                    <div class="text">Назначить роль</div>
+                    <div class="menu">
+                        <div class="item" data-value="moderator">Модератор</div>
+                        <div class="item" data-value="admin">Администратор</div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $('#example1').Tabledit({
+    url: '/users',
+    deleteButton: true,
+    saveButton: true,
+    autoFocus: false,
+    buttons: {
+        edit: {
+            class: 'ui mini yellow icon button',
+            html: '<i class="pencil alternate icon" style="visibility: visible;"></i>',
+            action: 'edit'
+        },
+        save: {
+            class: 'ui mini green icon button',
+            html: '<i class="check circle icon" style="visibility: visible;"></i>',
+            action: 'save'
+        },
+        delete: {
+            class: 'ui mini red icon button',
+            html: '<i class="delete icon" style="visibility: visible;"></i>',
+            action: 'delete'
+        },
+        confirm: {
+            class: 'ui mini red button',
+            html: 'Подтвердить',
+    }
+
+    },
+    columns: {
+        identifier: [0, 'id'],
+        editable: [[1, 'Дисциплина'], [2, 'Преподаватель'], [3, 'Аудитория']]
+    }
+});
+
+
+
+
+
+
+</script>
+
+{% endblock content %}

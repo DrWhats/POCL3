@@ -4,22 +4,22 @@
 <form action="{{ url_for('register.register') }}" method="post" class="ui form">
     {{ form.csrf_token }}
     <div class="field">
-        <label>Username:</label>
+        <label>Имя пользователя (никнейм):</label>
         {{ form.username }}
     </div>
 
     <div class="field">
-        <label>Email:</label>
+        <label>Электронная почта:</label>
         {{ form.email }}
     </div>
 
     <div class="field">
-        <label>Password:</label>
+        <label>Пароль:</label>
         {{ form.password }}
     </div>
 
     <div class="field">
-        <label>Confirm Password:</label>
+        <label>Повторите пароль:</label>
         {{ form.confirm_password }}
     </div>
 
