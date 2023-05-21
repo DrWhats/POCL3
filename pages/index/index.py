@@ -1,8 +1,4 @@
-from flask import render_template, session, url_for, redirect, request, Blueprint, flash
-from models.user import User
-import database
-from werkzeug.security import generate_password_hash
-from pages.forms import QuestionsForm
+from flask import render_template, Blueprint
 blueprint = Blueprint('index', __name__, template_folder='templates')
 
 

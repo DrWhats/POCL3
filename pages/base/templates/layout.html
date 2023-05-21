@@ -21,7 +21,7 @@
             Создать заявку
         </a>
         {% endif %}
-        <a class="item">
+        <a class="item" href="{{ url_for('about.about') }}">
             О проекте
         </a>
         {% if current_user.is_authenticated %}
