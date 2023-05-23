@@ -5,7 +5,7 @@ class Types(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(30), unique=True, nullable=False)
 
-    def __init__(self, id, type):
+    def __init__(self, type, id=None):
         self.id = id
         self.type = type
 

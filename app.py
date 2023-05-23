@@ -7,6 +7,8 @@ from pages.question import question
 from pages.logout import logout
 from pages.users import users
 from pages.about import about
+from pages.admin import admin
+from pages.types import types
 from database import init_db
 from models.user import User
 from flask_login import LoginManager
@@ -28,6 +30,8 @@ app.register_blueprint(question.question_bp)
 app.register_blueprint(logout.logout_bp)
 app.register_blueprint(users.users_bp)
 app.register_blueprint(about.about_bp)
+app.register_blueprint(admin.admin_bp)
+app.register_blueprint(types.types_bp)
 
 
 @login_manager.user_loader
