@@ -6,17 +6,17 @@ from models.moderator import Moderator
 
 class Request(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    userId = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey(User.id), nullable=True)
     fio = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(50), nullable=False)
-    typeId = db.Column(db.Integer, db.ForeignKey(Types.id), nullable=False)
+    email = db.Column(db.String(50), nullable=True)
+    typeId = db.Column(db.Integer, db.ForeignKey(Types.id), nullable=True)
     phoneNumber = db.Column(db.String(12), nullable=False)
-    moderatorId = db.Column(db.Integer, db.ForeignKey(Moderator.id), nullable=False)
+    moderatorId = db.Column(db.Integer, db.ForeignKey(Moderator.id), nullable=True)
     shortdescribe = db.Column(db.String(50), nullable=False)
     question = db.Column(db.String(50), nullable=False)
     
 
-    def __init__(self, userId, fio, email, typeId, phoneNumber, moderatorId, shortdescribe, question):
+    def __init__(self, fio, phoneNumber, shortdescribe, question, userId=None, email=None, typeId=None, moderatorId=None):
         self.userId = userId
         self.fio = fio
         self.email = email
