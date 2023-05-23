@@ -2,7 +2,8 @@ from flask import render_template, session, url_for, redirect, request, Blueprin
 from database import db
 from pages.forms import QuestionsForm
 from models.request import Request
-from classifier.classifier import classify
+from models.types import Types
+from classifier.classifier import predict
 question_bp = Blueprint('question', __name__, template_folder='templates')
 
 
@@ -23,17 +24,19 @@ def question():
         print(question)
 
         new_request = Request(
-            userId=None,
             fio=fio,
             phoneNumber=phonenumber,
             typeId=None,
             shortdescribe=shortdescribe,
             question=question 
         )
+
         db.session.add(new_request)
         db.session.commit()
-        question_type = classify(question)
+        question_type = predict(question)
         print(question_type)
+        id = db.session.query(Types.id).filter(Types.type == question_type)
+        query = db.session.query(Request).filter(Request.question == question).update({Request.typeId: id})
         return render_template('question_success.html')
     else:
         flash("Invalid username or password.", 'error')
