@@ -13,3 +13,4 @@ def init_db(app):
         from models.request import Request
         from models.moderator import Moderator
         db.create_all()
+

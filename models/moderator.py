@@ -9,7 +9,7 @@ class Moderator(db.Model):
     role = db.Column(db.String(15), unique=False, nullable=True)
     tg = db.Column(db.String(15), unique=True, nullable=True)
 
-    def __init__(self, id, userId, role, tg):
+    def __init__(self, userId, role, tg = None,  id = None):
         self.id = id
         self.userId = userId
         self.role = role
