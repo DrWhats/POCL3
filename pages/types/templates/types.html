@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="ui container">
+    <div class="ui segment">
+        <div class="ui cards">
+            {% for type in current_types %}
+            <div class="card">
+                <div class="content">
+                    <div class="header">
+                        {{type.type}}
+                    </div>
+                </div>
+                <div class="extra content">
+                    <div class="ui two buttons">
+                        <div class="ui basic yellow button">Изменить</div>
+                        <div class="ui basic red button">Удалить</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="ui segment">
+        <form class="ui form" method="POST" action="/types">
+            {{ form.csrf_token }}
+            <div class="field">
+                <label>Добавить тип заявки</label>
+                {{ form.type }}
+            </div>
+            <button class="ui button" type="submit">Добавить</button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock content %}
