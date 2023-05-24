@@ -16,13 +16,13 @@ class Request(db.Model):
     question = db.Column(db.String(50), nullable=False)
     
 
-    def __init__(self, fio, phoneNumber, shortdescribe, question, userId=None, email=None, typeId=None, moderatorId=None):
-        self.userId = userId
+    def __init__(self, fio, phone_number, shortdescribe, question, user_id=None, email=None, type_id=None, moderator_id=None):
+        self.userId = user_id
         self.fio = fio
         self.email = email
-        self.typeId = typeId
-        self.phoneNumber = phoneNumber
-        self.moderatorId = moderatorId
+        self.typeId = type_id
+        self.phoneNumber = phone_number
+        self.moderatorId = moderator_id
         self.shortdescribe = shortdescribe
         self.question = question
 
