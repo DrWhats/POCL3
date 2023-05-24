@@ -25,8 +25,8 @@ def question():
 
         new_request = Request(
             fio=fio,
-            phoneNumber=phonenumber,
-            typeId=None,
+            phone_number=phonenumber,
+            type_id=None,
             shortdescribe=shortdescribe,
             question=question 
         )
