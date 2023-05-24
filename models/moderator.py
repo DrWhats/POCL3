@@ -9,9 +9,9 @@ class Moderator(db.Model):
     role = db.Column(db.String(15), unique=False, nullable=True)
     tg = db.Column(db.String(15), unique=True, nullable=True)
 
-    def __init__(self, userId, role, tg = None,  id = None):
+    def __init__(self, user_id, role, tg = None,  id = None):
         self.id = id
-        self.userId = userId
+        self.userId = user_id
         self.role = role
         self.tg = tg
 

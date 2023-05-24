@@ -35,8 +35,9 @@ def question():
         db.session.commit()
         question_type = predict(question)
         print(question_type)
-        id = db.session.query(Types.id).filter(Types.type == question_type)
-        query = db.session.query(Request).filter(Request.question == question).update({Request.typeId: id})
+        type_id = db.session.query(Types.id).filter(Types.type == question_type)
+        query = db.session.query(Request).filter(Request.question == question).update({Request.typeId: type_id})
+        print(query)
         return render_template('question_success.html')
     else:
         flash("Invalid username or password.", 'error')
