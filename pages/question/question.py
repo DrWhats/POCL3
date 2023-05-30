@@ -25,6 +25,7 @@ def question():
 
         new_request = Request(
             fio=fio,
+            email=email,
             phone_number=phonenumber,
             type_id=None,
             shortdescribe=shortdescribe,
@@ -34,10 +35,10 @@ def question():
         db.session.add(new_request)
         db.session.commit()
         question_type = predict(question)
-        print(question_type)
         type_id = db.session.query(Types.id).filter(Types.type == question_type)
-        query = db.session.query(Request).filter(Request.question == question).update({Request.typeId: type_id})
-        print(query)
+        current_requset = db.session.execute(db.session.query(Request).filter(Request.question == question))
+        current_requset.typeId = type_id
+        db.session.commit()
         return render_template('question_success.html')
     else:
         flash("Invalid username or password.", 'error')
