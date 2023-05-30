@@ -31,3 +31,4 @@ class TypeForm(FlaskForm):
 
 class ModeratorForm(FlaskForm):
     id = HiddenField(validators=[DataRequired()])
+    actions = HiddenField(validators=[DataRequired()])

@@ -22,16 +22,18 @@
             <td>{{ user.User.email }}</td>
             <td>{{ user.User.username }}</td>
             <td>
-                {% if user.Moderator.role is not none %}
+                {% if user.Moderator.role|length > 0 %}
                 <form class="ui form" method="POST" action="/users">
                     {{ form.csrf_token }}
                     <input id="id" name="id" type="hidden" value="{{user.User.id}}">
+                    <input id="actions" name="actions" type="hidden" value="remove">
                     <button class="ui red button" type="submit">Разжаловать</button>
                 </form>
                 {% else %}
                 <form class="ui form" method="POST" action="/users">
                     {{ form.csrf_token }}
                     <input id="id" name="id" type="hidden" value="{{user.User.id}}">
+                    <input id="actions" name="actions" type="hidden" value="assign">
                     <button class="ui yellow button" type="submit">Назначить</button>
                 </form>
                 {% endif %}
