@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  flask_app:
+    build:
+      context: flask_app
+      dockerfile: Dockerfile
+    image: pocl_compose
+    ports:
+      - "5000:5000"
+    volumes:
+      - database_volume:/database
+    environment:
+      - DATABASE_URL=sqlite:////database/db
+
+  reqwiz_bot:
+    build:
+      context: reqwiz_bot
+      dockerfile: Dockerfile
+    image: pocl_bot
+    environment:
+      - DATABASE_URL=sqlite:////database/db
+    volumes:
+      - database_volume:/database
+
+  sqlite_container:
+    build:
+      context: sqlite_db
+      dockerfile: Dockerfile
+    image: sqlite_image
+    volumes:
+      - database_volume:/database
+
+volumes:
+  database_volume:

@@ -1,4 +1,5 @@
 from telebot import TeleBot
+import database
 
 bot = TeleBot('6044613463:AAFQLGVBq_UJxIKJiYBYqVWeum1_VMSpIKk')
 
@@ -14,6 +15,8 @@ def get_text_messages(message):
     elif message.text == "/help":
         bot.send_message(message.from_user.id, "Напиши /reg, чтобы привязать учетную запись своего личного кабинета.")
     elif message.text == "Привет":
+        print(database.get_all_types())
+        bot.send_message(message.from_user.id, database.get_all_types())
         bot.send_message(message.from_user.id,
                          "Привет! напиши /reg, чтобы привязать учетную запись своего личного кабинета.")
     elif message.text == "привет":

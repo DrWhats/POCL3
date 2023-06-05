@@ -1,11 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 db = SQLAlchemy()
 
 
 def init_db(app):
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["DATABASE_URL"]
     db.init_app(app)
     with app.app_context():
         from models.user import User

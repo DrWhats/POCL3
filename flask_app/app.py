@@ -17,8 +17,6 @@ login_manager = LoginManager()
 
 app = Flask(__name__, template_folder='pages/base/templates')
 app.config['SECRET_KEY'] = 'secret-key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.permanent_session_lifetime = timedelta(minutes=30)
 init_db(app)
 login_manager.init_app(app)

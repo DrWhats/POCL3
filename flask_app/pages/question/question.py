@@ -3,7 +3,7 @@ from database import db
 from pages.forms import QuestionsForm
 from models.request import Request
 from models.types import Types
-from classifier.classifier import predict
+#from classifier.classifier import predict
 question_bp = Blueprint('question', __name__, template_folder='templates')
 
 
@@ -34,11 +34,11 @@ def question():
 
         db.session.add(new_request)
         db.session.commit()
-        question_type = predict(question)
-        type_id = db.session.query(Types.id).filter(Types.type == question_type)
-        current_requset = db.session.execute(db.session.query(Request).filter(Request.question == question))
-        current_requset.typeId = type_id
-        db.session.commit()
+        #question_type = predict(question)
+        #type_id = db.session.query(Types.id).filter(Types.type == question_type)
+        #current_requset = db.session.execute(db.session.query(Request).filter(Request.question == question))
+        #current_requset.typeId = type_id
+        #db.session.commit()
         return render_template('question_success.html')
     else:
         flash("Invalid username or password.", 'error')
