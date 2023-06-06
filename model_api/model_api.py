@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .classifier import predict
+from classifier import predict
 
 app = FastAPI()
 
