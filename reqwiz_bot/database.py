@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy import text
 import os
+from werkzeug.security import generate_password_hash, check_password_hash
 
 engine = create_engine(os.environ["DATABASE_URL"], echo=True)
 
@@ -15,11 +16,10 @@ def check_connection():
         return False
 
 
-def get_all_types():
+def check_user(email, password):
     conn = engine.connect()
-    sql = text("SELECT type FROM types")
-    res = conn.execute(sql).fetchall()
-    resarr = ""
-    for record in res:
-        resarr += record[0] + ","
-    return resarr
+    sql = text(f"SELECT email, password FROM User WHERE email = '{email}'")
+    res = conn.execute(sql).fetchone()
+    print(res[0] + " " + res[1])
+    if check_password_hash(res[1], password):
+        return True

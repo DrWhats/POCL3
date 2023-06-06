@@ -10,6 +10,7 @@ services:
       - "5000:5000"
     volumes:
       - database_volume:/database
+      - models:/flask_app/models
     environment:
       - DATABASE_URL=sqlite:////database/db
 
@@ -20,6 +21,11 @@ services:
     image: pocl_modelapi
     ports:
       - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:////database/db
+    volumes:
+      - database_volume:/database
+      - models:/flask_app/models
 
   reqwiz_bot:
     build:
@@ -30,6 +36,7 @@ services:
       - DATABASE_URL=sqlite:////database/db
     volumes:
       - database_volume:/database
+      - models:/flask_app/models
 
   sqlite_container:
     build:
@@ -41,3 +48,4 @@ services:
 
 volumes:
   database_volume:
+  models:

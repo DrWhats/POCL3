@@ -1,43 +1,43 @@
 from telebot import TeleBot
 import database
+import textphrases as tf
 
 bot = TeleBot('6044613463:AAFQLGVBq_UJxIKJiYBYqVWeum1_VMSpIKk')
 
 
-@bot.message_handler(content_types=['text'])
-def get_text_messages(message):
-    if message.text == "/start":
-        bot.send_message(message.from_user.id,
-                         "Привет! напиши /reg, чтобы привязать учетную запись своего личного кабинета.")
-    elif message.text == '/reg':
-        bot.send_message(message.from_user.id, "Какой у тебя логин от личного кабинета?")
-        bot.register_next_step_handler(message, get_login)  # следующий шаг – функция get_login
-    elif message.text == "/help":
-        bot.send_message(message.from_user.id, "Напиши /reg, чтобы привязать учетную запись своего личного кабинета.")
-    elif message.text == "Привет":
-        print(database.get_all_types())
-        bot.send_message(message.from_user.id, database.get_all_types())
-        bot.send_message(message.from_user.id,
-                         "Привет! напиши /reg, чтобы привязать учетную запись своего личного кабинета.")
-    elif message.text == "привет":
-        bot.send_message(message.from_user.id,
-                         "Привет! напиши /reg, чтобы привязать учетную запись своего личного кабинета.")
-    else:
-        bot.send_message(message.from_user.id, "Я тебя не понимаю( Напиши /help или /reg.")
+@bot.message_handler(func=lambda message: message.text == 'Привет')
+def get_hello(message):
+    bot.send_message(message.from_user.id, tf.hello)
+
+
+@bot.message_handler(commands=['start'])
+def get_start(message):
+    bot.send_message(message.from_user.id, tf.hello)
+
+
+@bot.message_handler(commands=['reg'])
+def reg(message):
+    bot.send_message(message.from_user.id, tf.reg_login)
+    bot.register_next_step_handler(message, get_login)  # следующий шаг – функция get_login
 
 
 def get_login(message):  # получаем логин пользователя
-    global login
-    login = message.text
-    bot.send_message(message.from_user.id, 'Какой у тебя пароль?')
-    bot.register_next_step_handler(message, get_password)  # следующий шаг – функция get_password
-    print(login)
+    user = {'login': message.text}
+    bot.send_message(message.from_user.id, tf.reg_password)
+    bot.register_next_step_handler(message, get_password, user)  # следующий шаг – функция get_password
 
 
-def get_password(message):  # получаем пароль пользователя
-    global password
-    password = message.text
-    print(password)
+def get_password(message, user):  # получаем пароль пользователя
+    user['password'] = message.text
+    bot.send_message(message.from_user.id, "Ай маладес: " + str(user))
+    check_user(user, message)
+
+
+def check_user(user, message):
+    if database.check_user(user['login'], user['password']):
+        bot.send_message(message.from_user.id, tf.wait_category)
+    else:
+        bot.send_message(message.from_user.id, tf.not_moder)
 
 
 bot.polling(none_stop=True, interval=0)
