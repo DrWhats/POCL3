@@ -31,11 +31,11 @@ def get_password(message, user):  # получаем пароль пользов
     user['password'] = message.text
     bot.send_message(message.from_user.id, "Ай маладес: " + str(user))
     check_user(user, message)
-    database.save_user(user['email'], message.from_user.id)
 
 
 def check_user(user, message):
-    if database.check_user(user['login'], user['password']):
+    if database.check_user(user['email'], user['password']):
+        database.save_user(user['email'], message.from_user.id)
         bot.send_message(message.from_user.id, tf.wait_category)
     else:
         bot.send_message(message.from_user.id, tf.not_moder)
