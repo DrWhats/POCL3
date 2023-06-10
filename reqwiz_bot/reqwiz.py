@@ -22,7 +22,7 @@ def reg(message):
 
 
 def get_login(message):  # получаем логин пользователя
-    user = {'login': message.text}
+    user = {'email': message.text}
     bot.send_message(message.from_user.id, tf.reg_password)
     bot.register_next_step_handler(message, get_password, user)  # следующий шаг – функция get_password
 
@@ -31,6 +31,7 @@ def get_password(message, user):  # получаем пароль пользов
     user['password'] = message.text
     bot.send_message(message.from_user.id, "Ай маладес: " + str(user))
     check_user(user, message)
+    database.save_user(user['email'], message.from_user.id)
 
 
 def check_user(user, message):

@@ -23,3 +23,17 @@ def check_user(email, password):
     print(res[0] + " " + res[1])
     if check_password_hash(res[1], password):
         return True
+
+def save_user(email, tg_login):
+    conn = engine.connect()
+    sql = text(f'''
+               UPDATE moderator 
+               SET tg = '{tg_login}' 
+               WHERE userId = (
+                SELECT id
+                FROM user
+                WHERE email = '{email}'
+               )
+            ''')
+    conn.execute(sql)
+    print('Успешно зарегистрирован')
