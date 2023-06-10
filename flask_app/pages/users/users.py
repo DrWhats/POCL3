@@ -19,7 +19,6 @@ def users():
             db.session.commit()
         elif form.actions.data == 'remove':
             old_moderator = db.session.query(Moderator).filter(Moderator.userId == form.id.data).first()
-            #old_moderator = db.session.execute(old_moderator)
             db.session.delete(old_moderator)
             db.session.commit()
         return redirect(url_for('users.users'))
