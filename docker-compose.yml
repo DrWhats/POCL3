@@ -5,27 +5,25 @@ services:
     build:
       context: flask_app
       dockerfile: Dockerfile
-    image: pocl_compose
+    image: flask
     ports:
       - "5000:5000"
-    volumes:
-      - database_volume:/database
-      - models:/flask_app/models
     environment:
-      - DATABASE_URL=sqlite:////database/db
+      - DATABASE_URL=sqlite:////instance/db
+    volumes:
+      - instance:/instance
 
   model_api:
     build:
       context: model_api
       dockerfile: Dockerfile
-    image: pocl_modelapi
+    image: modelapi
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=sqlite:////database/db
+      - DATABASE_URL=sqlite:////instance/db
     volumes:
-      - database_volume:/database
-      - models:/flask_app/models
+      - instance:/instance
 
   reqwiz_bot:
     build:
@@ -33,19 +31,9 @@ services:
       dockerfile: Dockerfile
     image: pocl_bot
     environment:
-      - DATABASE_URL=sqlite:////database/db
+      - DATABASE_URL=sqlite:////instance/db
     volumes:
-      - database_volume:/database
-      - models:/flask_app/models
-
-  sqlite_container:
-    build:
-      context: sqlite_db
-      dockerfile: Dockerfile
-    image: sqlite_image
-    volumes:
-      - database_volume:/database
+      - instance:/instance
 
 volumes:
-  database_volume:
-  models:
+  instance:

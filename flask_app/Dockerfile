@@ -23,6 +23,8 @@ RUN pip install --no-cache-dir -r req.txt
 # Скопируйте оставшиеся файлы проекта
 COPY . .
 
+VOLUME /instance
+
 # Экспонируйте порт для работы с приложением
 EXPOSE 5000
 
