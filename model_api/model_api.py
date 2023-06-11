@@ -4,6 +4,7 @@ import database
 
 app = FastAPI()
 
+
 @app.post("/model_request")
 async def model_request(text: dict):
     prediction = predict(text['question'])
