@@ -18,7 +18,7 @@ def check_connection():
 
 def update_request_label(req_type, req_text):
     sql = text(f'''UPDATE request
-    SET type_id = SELECT FROM types WHERE type='{req_type}'
+    SET type_id = (SELECT FROM types WHERE type='{req_type}')
     WHERE question = '{req_text}'
     ''')
     conn.execute(sql)
