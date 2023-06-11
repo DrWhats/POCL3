@@ -1,5 +1,32 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+{{ list_types }}
 
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+        <i class="users icon"></i>
+        Модераторы
+    </h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Имя пользователя</th>
+            <th>Тип заявки</th>
+            <th>Действие</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.User.email }}</td>
+            <td>{{ user.User.username }}</td>
+            <td> {{ user.Moderator.role}}</td>
+            <td> Заглушка для действия</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}
