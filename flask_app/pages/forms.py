@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, HiddenField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, HiddenField, FieldList, SelectField
+from wtforms.widgets import ListWidget
 from wtforms.validators import DataRequired, Length, EqualTo, Email
 
 
@@ -32,3 +33,10 @@ class TypeForm(FlaskForm):
 class ModeratorForm(FlaskForm):
     id = HiddenField(validators=[DataRequired()])
     actions = HiddenField(validators=[DataRequired()])
+
+
+class ModerTypes(FlaskForm):
+    user_id = HiddenField(validators=[DataRequired()])
+    choices = []
+    dropdown = SelectField('Выберите тип', choices=choices)
+    submit = SubmitField('Сохранить')
