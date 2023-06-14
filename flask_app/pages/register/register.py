@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.user import User
+from models.moderator import Moderator
 from database import db
 from pages.forms import RegisterForm
 
@@ -17,7 +18,6 @@ def register():
         email = form.email.data.lower()
         password = form.password.data
 
-    
         if len(username) < 2:
             flash('Имя пользователя должно быть длиннее 1 символа', 'error')
             return render_template(reg_html, form=form)
@@ -31,11 +31,17 @@ def register():
         if existing_email:
             flash('Email уже занят', 'error')
             return render_template(reg_html, form=form)
-        
+
         print(password)
         new_user = User(username=username, email=email, password=password)
         db.session.add(new_user)
         db.session.commit()
+
+        if new_user.id == 1:
+            admin_role = 1
+            new_moderator = Moderator(user_id=new_user.id, role=admin_role)
+            db.session.add(new_moderator)
+            db.session.commit()
 
         flash('Вы успешно зарегистрировались! Теперь выполните вход.', 'success')
         return redirect(url_for('login.login'))

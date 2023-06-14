@@ -27,14 +27,14 @@
                     {{ form.csrf_token }}
                     <input id="id" name="id" type="hidden" value="{{user.User.id}}">
                     <input id="actions" name="actions" type="hidden" value="remove">
-                    <button class="ui red button" type="submit">Разжаловать</button>
+                    <button class="ui red button" type="submit">Разжаловать модератора</button>
                 </form>
                 {% else %}
                 <form class="ui form" method="POST" action="/users">
                     {{ form.csrf_token }}
                     <input id="id" name="id" type="hidden" value="{{user.User.id}}">
                     <input id="actions" name="actions" type="hidden" value="assign">
-                    <button class="ui yellow button" type="submit">Назначить</button>
+                    <button class="ui yellow button" type="submit">Назначить модератором</button>
                 </form>
                 {% endif %}
             </td>

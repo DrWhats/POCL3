@@ -3,11 +3,13 @@ from models.user import User
 from models.moderator import Moderator
 from pages.forms import ModeratorForm
 from database import db
+from decors.role_req import role_req
 
 users_bp = Blueprint('users', __name__, template_folder='templates')
 
 
 @users_bp.route('/users', methods=['GET', 'POST'])
+@role_req(1)
 def users():
     form = ModeratorForm()
     query = db.session.query(User, Moderator).join(Moderator, User.id == Moderator.userId, isouter=True)
