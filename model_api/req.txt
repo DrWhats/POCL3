@@ -1,0 +1,7 @@
+transformers==4.29.1
+numpy==1.24.3
+torch==2.0.1
+fastapi==0.96.0
+uvicorn==0.22.0
+SQLAlchemy==2.0.16
+pyTelegramBotAPI==4.12.0
