@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
-from werkzeug.security import generate_password_hash, check_password_hash
-from models.user import User
-from models.moderator import Moderator
 from database import db
+from flask import Blueprint, flash, redirect, render_template, url_for
+from models.moderator import Moderator
+from models.user import User
 from pages.forms import RegisterForm
+from werkzeug.security import check_password_hash, generate_password_hash
 
 register_bp = Blueprint('register', __name__, template_folder='templates')
 

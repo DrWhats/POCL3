@@ -1,9 +1,10 @@
-from flask import render_template, session, url_for, redirect, request, Blueprint, flash
+import requests
 from database import db
-from pages.forms import QuestionsForm
+from flask import Blueprint, flash, render_template
 from models.request import Request
 from models.types import Types
-import requests
+from pages.forms import QuestionsForm
+
 question_bp = Blueprint('question', __name__, template_folder='templates')
 
 

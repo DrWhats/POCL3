@@ -1,19 +1,20 @@
-from flask import Flask
 from datetime import timedelta
-from pages.index import index
-from pages.login import login
-from pages.register import register
-from pages.question import question
-from pages.logout import logout
-from pages.users import users
+
+from database import init_db
+from flask import Flask
+from flask_login import LoginManager
+from models.user import User
 from pages.about import about
 from pages.admin import admin
-from pages.types import types
-from pages.type_moderator import type_moderator
+from pages.index import index
+from pages.login import login
+from pages.logout import logout
 from pages.moderators import moderators
-from database import init_db
-from models.user import User
-from flask_login import LoginManager
+from pages.question import question
+from pages.register import register
+from pages.type_moderator import type_moderator
+from pages.types import types
+from pages.users import users
 
 login_manager = LoginManager()
 

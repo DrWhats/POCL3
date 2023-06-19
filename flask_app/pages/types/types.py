@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, session
-from pages.forms import TypeForm
-from models.types import Types
 from database import db
+from flask import Blueprint, redirect, render_template, url_for
+from models.types import Types
+from pages.forms import TypeForm
 
 types_bp = Blueprint('types', __name__, template_folder='templates')
 

@@ -1,5 +1,5 @@
-from flask import Blueprint, redirect, url_for, request, render_template
 from decors.role_req import role_req
+from flask import Blueprint, redirect, render_template, request, url_for
 
 admin_bp = Blueprint('admin', __name__, template_folder='templates')
 

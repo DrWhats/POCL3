@@ -1,6 +1,5 @@
-from flask import Blueprint, redirect, url_for, session
+from flask import Blueprint, redirect, session, url_for
 from flask_login import logout_user
-
 
 logout_bp = Blueprint('logout', __name__, template_folder='templates')
 

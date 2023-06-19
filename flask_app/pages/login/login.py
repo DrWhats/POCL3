@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, session
+from flask import (Blueprint, flash, redirect, render_template, request,
+                   session, url_for)
 from flask_login import login_user
-from werkzeug.security import check_password_hash, generate_password_hash
-
 from models.user import User
 from pages.forms import LoginForm
+from werkzeug.security import check_password_hash, generate_password_hash
 
 login_bp = Blueprint('login', __name__, template_folder='templates')
 

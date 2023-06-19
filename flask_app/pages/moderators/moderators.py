@@ -1,9 +1,9 @@
-from flask import Blueprint, redirect, url_for, request, render_template
-from models.user import User
-from models.moderator import Moderator
-from models.types import Types
 from database import db
 from decors.role_req import role_req
+from flask import Blueprint, redirect, render_template, request, url_for
+from models.moderator import Moderator
+from models.types import Types
+from models.user import User
 
 moderators_bp = Blueprint('moderators', __name__, template_folder='templates')
 
