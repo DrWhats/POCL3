@@ -1,15 +1,10 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import numpy as np
-
+import database
 
 def predict(text):
-    label_texts = [
-        'Личный кабинет', 'Продукты Microsoft',
-        'Электронно-библиотечная система', 'Ведомости',
-        'Система электронной поддержки образовательных курсов',
-        'Планы', 'Рабочая программа дисциплины', 'Нагрузка', 'Нагрузка', 'Диплом мастер'
-    ] # изменится в будущем
+    label_texts = database.get_types_list()
 
     tokenizer = AutoTokenizer.from_pretrained('cointegrated/rubert-base-cased-nli-threeway')
     model = AutoModelForSequenceClassification.from_pretrained('cointegrated/rubert-base-cased-nli-threeway')
