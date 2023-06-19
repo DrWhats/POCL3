@@ -22,3 +22,23 @@ def update_request_label(req_type, req_text):
     WHERE question = '{req_text}'
     ''')
     conn.execute(sql)
+<<<<<<< Updated upstream
+=======
+
+
+def get_type_moders(type):
+    sql = text(f'SELECT tg FROM moderator WHERE typeId = {type}')
+    results = conn.execute(sql).fetchall()
+    tg_list = [result['tg'] for result in results]
+    return tg_list
+
+
+def get_type_by_label(label):
+    sql = text(f'SELECT id FROM types WHERE type = {label}')
+    res = conn.execute(sql).fetchone()
+    if res:
+        type_id = res['id']
+        return type_id
+    else:
+        return None
+>>>>>>> Stashed changes
