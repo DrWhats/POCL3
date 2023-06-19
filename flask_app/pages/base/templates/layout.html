@@ -21,6 +21,13 @@
             Создать заявку
         </a>
         {% endif %}
+        {% if current_user.is_authenticated %}
+        {% if current_user.id == 1 %}
+        <a class="item" href="{{ url_for('admin.admin') }}">
+            Администрирование
+        </a>
+        {% endif %}
+        {% endif %}
         <a class="item" href="{{ url_for('about.about') }}">
             О проекте
         </a>

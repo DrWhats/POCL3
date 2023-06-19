@@ -15,16 +15,13 @@ def type_moderator():
     list_types = [(t.id, t.type) for t in types]
     if request.method == "POST":
         if request.form.get('action') == 'open':
-            user = (db.session.query(Moderator, User).
-                    join(User, Moderator.id == request.form.get("moder_id"), isouter=True)
-                    .first())
-            print(request.form.get("moder_id"))
+            sql = (db.session.query(User, Moderator)
+                   .outerjoin(Moderator, Moderator.userId == User.id)
+                   .filter(Moderator.id == request.form.get("moder_id")))
+            user = sql.first()
             return render_template('moderator_type.html', user=user, types=list_types)
         if request.form.get('action') == 'assign':
             moderator = db.session.query(Moderator).filter(Moderator.id == request.form.get("moder_id")).first()
-            print(request.form.get("moder_id"))
             moderator.typeId = request.form.get("type_id")
-            print(request.form.get("type_id"))
             db.session.commit()
             return redirect(url_for('moderators.moderators'))
-

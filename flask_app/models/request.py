@@ -14,9 +14,9 @@ class Request(db.Model):
     moderatorId = db.Column(db.Integer, db.ForeignKey(Moderator.id), nullable=True)
     shortdescribe = db.Column(db.String(50), nullable=False)
     question = db.Column(db.String(50), nullable=False)
-    
 
-    def __init__(self, fio, phone_number, shortdescribe, question, user_id=None, email=None, type_id=None, moderator_id=None):
+    def __init__(self, fio, phone_number, shortdescribe, question, user_id=None, email=None, type_id=None,
+                 moderator_id=None):
         self.userId = user_id
         self.fio = fio
         self.email = email
