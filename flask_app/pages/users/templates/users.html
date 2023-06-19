@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+        <i class="users icon"></i>
+        Пользователи
+    </h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Имя пользователя</th>
+            <th>Роль</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.User.email }}</td>
+            <td>{{ user.User.username }}</td>
+            <td>
+                {% if user.Moderator.role|length > 0 %}
+                <form class="ui form" method="POST" action="/users">
+                    {{ form.csrf_token }}
+                    <input id="id" name="id" type="hidden" value="{{user.User.id}}">
+                    <input id="actions" name="actions" type="hidden" value="remove">
+                    <button class="ui red button" type="submit">Разжаловать модератора</button>
+                </form>
+                {% else %}
+                <form class="ui form" method="POST" action="/users">
+                    {{ form.csrf_token }}
+                    <input id="id" name="id" type="hidden" value="{{user.User.id}}">
+                    <input id="actions" name="actions" type="hidden" value="assign">
+                    <button class="ui yellow button" type="submit">Назначить модератором</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

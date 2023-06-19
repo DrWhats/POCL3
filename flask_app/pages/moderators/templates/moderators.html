@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="ui container">
+    <h2 class="ui center aligned icon header">
+        <i class="users icon"></i>
+        Модераторы
+    </h2>
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Имя пользователя</th>
+            <th>Телеграм</th>
+            <th>Тип заявки</th>
+            <th>Действие</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.Moderator.id }}</td>
+            <td>{{ user.User.email }}</td>
+            <td>{{ user.User.username }}</td>
+            <td>{{ user.Moderator.tg }}</td>
+            <td>{{ user.Types.type }}</td>
+            <td>
+                <form class="ui form" method="POST" action="/type_moderator">
+                    <input id="moder_id" name="moder_id" type="hidden" value="{{user.Moderator.id}}">
+                    <input id="action" name="action" type="hidden" value="open">
+                    <button class="ui yellow button" type="submit">Назначить тип заявок</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

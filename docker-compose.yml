@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  flask_app:
+    build:
+      context: flask_app
+      dockerfile: Dockerfile
+    image: flask
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=sqlite:////instance/db
+    volumes:
+      - instance:/instance
+    networks:
+      network:
+        ipv4_address: 10.5.0.3
+
+  model_api:
+    build:
+      context: model_api
+      dockerfile: Dockerfile
+    image: modelapi
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:////instance/db
+    volumes:
+      - instance:/instance
+    networks:
+      network:
+        ipv4_address: 10.5.0.5
+
+  reqwiz_bot:
+    build:
+      context: reqwiz_bot
+      dockerfile: Dockerfile
+    image: pocl_bot
+    environment:
+      - DATABASE_URL=sqlite:////instance/db
+    volumes:
+      - instance:/instance
+    networks:
+      network:
+        ipv4_address: 10.5.0.4
+
+volumes:
+  instance:
+
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
